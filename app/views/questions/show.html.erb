@@ -1,0 +1,35 @@
+<div>
+  <h1>title:</h1>
+  <h2><%= @question.title %></h2>
+  <h1>body:</h1>
+  <h2> <%= @question.body %></h2>
+
+  <hr>
+  <h1>Answer</h1>
+  <div class="show-all-answer">
+
+    <% @answers=find_answer_by_question(@question) %>
+
+    <% @answers.each do |answer| %>
+        <h2><%= answer.body %></h2>
+        <%= link_to "Delete",answer_path(answer),method: :delete %>
+    <% end %>
+  </div>
+
+  <div class="create-new-answer">
+    <h3>Create an Answer</h3>
+    <%= form_for [@question,@answer] do |f|%>
+    <div>
+      <%= f.label :Body %>
+      <%= f.text_field :body %>
+    </div>
+
+        <%= f.submit %>
+    <% end %>
+
+  </div>
+
+
+</div>
+
+

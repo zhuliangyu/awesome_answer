@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AwesomeAnswersSelfStudy</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  <nav>
+    <ul>
+      <li><%= link_to "home",root_path %></li>
+      <li><%= link_to "New Question",new_question_path %></li>
+      <li><%= link_to "Question index",questions_path %></li>
+    </ul>
+  </nav>
+
+  <session class="error">
+    <% if flash[:alert] %>
+    <%= flash[:alert] %>
+    <% end %>
+  </session>
+
+
+
+    <%= yield %>
+  </body>
+</html>
