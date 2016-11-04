@@ -12,7 +12,10 @@ class QuestionsController < ApplicationController
 
   def create
     question_params=get_question_params()
+
+    @user=current_user
     @question=Question.new(question_params)
+    @question.user=current_user
     if @question.save
       redirect_to question_path(@question)
     else
@@ -29,12 +32,10 @@ class QuestionsController < ApplicationController
     @question=find_question()
 
 
-
   end
 
   def edit
-   @question=find_question
-
+    @question=find_question
 
 
   end
@@ -50,7 +51,6 @@ class QuestionsController < ApplicationController
       render :edit
 
     end
-
 
 
   end

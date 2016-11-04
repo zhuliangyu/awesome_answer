@@ -3,6 +3,9 @@
   <h2><%= @question.title %></h2>
   <h1>body:</h1>
   <h2> <%= @question.body %></h2>
+  <h1>User:</h1>
+  <h2> <%= @question.user.name %></h2>
+
 
   <hr>
   <h1>Answer</h1>
@@ -12,6 +15,7 @@
 
     <% @answers.each do |answer| %>
         <h2><%= answer.body %></h2>
+        <h2><%= answer.user.name %></h2>
         <%= link_to "Delete",answer_path(answer),method: :delete %>
     <% end %>
   </div>

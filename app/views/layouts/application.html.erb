@@ -1,31 +1,61 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>AwesomeAnswersSelfStudy</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>AwesomeAnswersSelfStudy</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
+<body>
 
-  <nav>
-    <ul>
-      <li><%= link_to "home",root_path %></li>
-      <li><%= link_to "New Question",new_question_path %></li>
-      <li><%= link_to "Question index",questions_path %></li>
-    </ul>
-  </nav>
+<nav>
+  <ul>
+    <!--show user's name-->
+    <% if user_sign_in? %>
+    <%= current_user.name %>
 
-  <session class="error">
-    <% if flash[:alert] %>
-    <%= flash[:alert] %>
     <% end %>
-  </session>
+
+    <li><%= link_to "home", root_path %></li>
+    <li><%= link_to "New Question", new_question_path %></li>
+    <li><%= link_to "Question index", questions_path %></li>
+
+    <!--add user-->
+    <li><%= link_to "Add a new user", new_user_path %></li>
+    <!--add user-->
+
+    <!--user sign in-->
+    <li><%= link_to "login", new_session_path %></li>
+    <!--user sign in-->
+
+    <!--user log out-->
+    <% if user_sign_in? %>
+
+        <li><%= link_to "logout", session_path(current_user), method: :delete %></li>
+
+    <% end %>
+
+    <!--user log out-->
+
+  </ul>
+</nav>
+
+<session class="error">
+  <% if flash[:alert] %>
+      <%= flash[:alert] %>
+  <% end %>
+</session>
+
+<session class="notice">
+  <% if notice %>
+      <%= notice %>
+  <% end %>
+</session>
 
 
 
-    <%= yield %>
-  </body>
+<%= yield %>
+</body>
 </html>

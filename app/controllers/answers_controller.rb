@@ -1,8 +1,10 @@
 class AnswersController < ApplicationController
 
   def create
+    @user=current_user
     @answer=Answer.new(get_answer_params)
     @answer.question=get_question
+    @answer.user=@user
     if @answer.save
       redirect_to question_path(get_question)
 
