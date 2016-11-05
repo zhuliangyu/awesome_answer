@@ -1,4 +1,7 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user,except: [:index,:show]
+  before_action :authorization_question,only: [:update,:destroy]
+
 
   def index
     @questions=Question.order(updated_at: :desc)
@@ -42,6 +45,7 @@ class QuestionsController < ApplicationController
 
   def update
     @question=Question.new(get_question_params)
+    @question.user=current_user
 
     if @question.save
       redirect_to questions_path
@@ -77,6 +81,11 @@ class QuestionsController < ApplicationController
 
   def find_question
     Question.find(params[:id])
+  end
+
+  def authorization_question
+    redirect_to questions_path,notice: "You can't do this!" unless can? :manage_question, find_question
+
   end
 
 end

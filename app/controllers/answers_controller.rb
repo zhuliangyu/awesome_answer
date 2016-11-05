@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  before_action :authorization_answer,only: [:update,:destroy]
+
 
   def create
     @user=current_user
@@ -50,5 +52,10 @@ class AnswersController < ApplicationController
 
   def get_question_by_answer(answer)
     answer.question
+  end
+
+  def authorization_answer
+    redirect_to question_path(get_answer.question),notice: "You can't do this!" unless can? :delete_answer,get_answer
+
   end
 end
