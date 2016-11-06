@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :questions, shallow: true do
     resources :answers, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
   end
 
   resources :users, only: [:new, :create]

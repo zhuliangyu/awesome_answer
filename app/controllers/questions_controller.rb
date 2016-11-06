@@ -44,7 +44,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question=Question.new(get_question_params)
+    @question=find_question
+    @question.update(get_question_params)
     @question.user=current_user
 
     if @question.save
@@ -85,7 +86,6 @@ class QuestionsController < ApplicationController
 
   def authorization_question
     redirect_to questions_path,notice: "You can't do this!" unless can? :manage_question, find_question
-
   end
 
 end

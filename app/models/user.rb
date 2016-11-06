@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :answers, dependent: :nullify
   has_many :questions, dependent: :nullify
+  has_many :questions,through: :likes
+  has_many :likes,dependent: :destroy
 
   validates :name,presence: true
   validates :email,uniqueness: true,presence: true
