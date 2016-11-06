@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :questions, shallow: true do
-    resources :answers, only: [:create, :destroy]
+    resources :answers, only: [:create, :destroy] do
+      resources :votes, only: [:create,:update,:destroy]
+    end
+
     resources :likes, only: [:create, :destroy]
   end
 

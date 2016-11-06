@@ -1,0 +1,29 @@
+***********
+users--vote--answer
+
+three status
+vote(create) unvote(destroy) oppose(update)
+
+rails g model vote is_up:boolean user:references answer:references
+
+
+rails g controller votes create,update,destroy
+rails d model vote
+
+rails db:rollback
+
+route
+
+u=User.last
+a=Answer.last
+v=Vote.new
+v.user=u
+v.answer=a
+v.is_up=true
+
+v.save
+
+*****************
+cancan
+can't like question their posting
+*******************

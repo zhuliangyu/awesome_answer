@@ -12,6 +12,9 @@ class User < ApplicationRecord
   validates :name,presence: true
   validates :email,uniqueness: true,presence: true
 
+  has_many :votes,dependent: :destroy
+  has_many :answers,through: :votes
+
   private
   def downcase_email
     email.downcase! if email.present?

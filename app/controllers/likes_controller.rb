@@ -1,8 +1,9 @@
 class LikesController < ApplicationController
   before_action :authentication_like
+  before_action :authorization_like
 
   def create
-    @question=Question.find(params[:question_id])
+    @question=find_question
     @user=current_user
     @like=Like.new
     @like.user=@user
@@ -25,13 +26,29 @@ class LikesController < ApplicationController
     end
 
 
-
   end
 
   private
   def authentication_like
     redirect_to new_session_path, notice: "Please log in first!" unless user_sign_in?
 
+  end
+
+  def authorization_like
+    redirect_to question_path(find_question), notice: "You can't like yourself!" unless can? :like, find_question
+
+  end
+
+  def find_question
+    if params[:question_id]
+      # from create url
+      @question ||=Question.find(params[:question_id])
+
+    elsif params[:id]
+      # from destroy url
+      @question ||= Question.find(params[:id])
+
+    end
   end
 
 end
