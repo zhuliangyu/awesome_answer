@@ -39,6 +39,10 @@ group :development, :test do
   gem 'interactive_editor'
   gem 'awesome_print'
   gem 'hirb'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+
+
 end
 
 group :development do
